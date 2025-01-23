@@ -37,8 +37,6 @@ const SignupScreen = ({ navigation }) => {
                     labelStyle={styles.label}
                     onChangeText={(text) => setPassword(text)}
                     value={password}
-                    autoCapitalize="none"
-                    autoCorrect={false}
                 />
             </Spacer>
             <Spacer>
