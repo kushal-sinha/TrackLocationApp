@@ -1,27 +1,23 @@
 import React, { useContext } from "react";
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet } from "react-native";
-import { Text } from "react-native-elements";
+import { KeyboardAvoidingView, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
 import Spacer from "../components/Spacer";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm"
+import NavLink from "../components/NavLink";
+import { NavigationEvents } from "react-navigation";
+
 const SignupScreen = ({ navigation }) => {
-    const { state, signup } = useContext(AuthContext);
+    const { state, signup, clearErrorMessage } = useContext(AuthContext);
     return (
         <SafeAreaView style={{ flex: 1 }}>
+            <NavigationEvents
+                onWillFocus={clearErrorMessage}
+            />
             <Spacer />
             <KeyboardAvoidingView behavior="height" style={styles.container}>
-                <AuthForm headerText="Sign-up" onSubmit={signup} errorMessage={state.errorMessage} submitButtonText="sign-up" />
-                <Spacer>
-                    <Text style={styles.signInText}>
-                        Already have an account?{" "}
-                        <Text
-                            style={styles.link}
-                            onPress={() => navigation.navigate("Signin")}
-                        >
-                            Sign In
-                        </Text>
-                    </Text>
-                </Spacer>
+                <AuthForm headerText="Sign-Up for Tracker" onSubmit={signup} errorMessage={state.errorMessage} submitButtonText="sign-up" />
+                <NavLink message="Already have an account" text="Sign in" routename="Signin" />
+
             </KeyboardAvoidingView>
         </SafeAreaView>
     );
@@ -41,15 +37,7 @@ const styles = StyleSheet.create({
         marginBottom: 200
     },
 
-    signInText: {
-        textAlign: "center",
-        color: "#333",
-    },
-    link: {
-        color: "#007BFF",
-        fontWeight: "bold",
-        textDecorationLine: "underline",
-    },
+
 });
 
 export default SignupScreen;
