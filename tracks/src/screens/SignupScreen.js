@@ -21,6 +21,10 @@ const SignupScreen = ({ navigation }) => {
                     leftIcon={{ type: "material", name: "email", color: "#007BFF" }}
                     inputStyle={styles.input}
                     labelStyle={styles.label}
+                    onChangeText={(text) => setEmail(text)}
+                    value={email}
+                    autoCapitalize="none"
+                    autoCorrect={false}
                 />
             </Spacer>
             <Spacer>
@@ -31,6 +35,10 @@ const SignupScreen = ({ navigation }) => {
                     leftIcon={{ type: "material", name: "lock", color: "#007BFF" }}
                     inputStyle={styles.input}
                     labelStyle={styles.label}
+                    onChangeText={(text) => setPassword(text)}
+                    value={password}
+                    autoCapitalize="none"
+                    autoCorrect={false}
                 />
             </Spacer>
             <Spacer>
