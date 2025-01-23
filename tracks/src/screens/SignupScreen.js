@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet, TouchableOpacity } from "react-native";
+import { View, SafeAreaView, StyleSheet } from "react-native";
 import Spacer from "../components/Spacer";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm"
@@ -8,17 +8,18 @@ import { NavigationEvents } from "react-navigation";
 
 const SignupScreen = ({ navigation }) => {
     const { state, signup, clearErrorMessage } = useContext(AuthContext);
+
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <NavigationEvents
                 onWillFocus={clearErrorMessage}
             />
             <Spacer />
-            <KeyboardAvoidingView behavior="height" style={styles.container}>
+            <View behavior="height" style={styles.container}>
                 <AuthForm headerText="Sign-Up for Tracker" onSubmit={signup} errorMessage={state.errorMessage} submitButtonText="sign-up" />
                 <NavLink message="Already have an account" text="Sign in" routename="Signin" />
 
-            </KeyboardAvoidingView>
+            </View>
         </SafeAreaView>
     );
 };

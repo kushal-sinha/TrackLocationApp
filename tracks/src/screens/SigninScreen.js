@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { KeyboardAvoidingView, SafeAreaView, StyleSheet } from "react-native";
+import { SafeAreaView, StyleSheet, View } from "react-native";
 import Spacer from "../components/Spacer";
 import { Context as AuthContext } from "../context/AuthContext";
 import AuthForm from "../components/AuthForm";
@@ -16,7 +16,7 @@ const SigninScreen = () => {
                 onWillFocus={clearErrorMessage}
             />
             <Spacer />
-            <KeyboardAvoidingView behavior="height" style={styles.container}>
+            <View behavior="height" style={styles.container}>
                 <AuthForm
                     headerText="Sign In for Tracker"
                     onSubmit={signin}
@@ -28,7 +28,7 @@ const SigninScreen = () => {
                     text="Sign Up"
                     routename="Signup"
                 />
-            </KeyboardAvoidingView>
+            </View>
         </SafeAreaView>
     );
 };
