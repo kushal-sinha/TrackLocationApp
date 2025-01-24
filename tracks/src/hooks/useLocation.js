@@ -2,18 +2,20 @@ import { useState, useEffect } from "react";
 import * as Location from 'expo-location';
 
 
-export default (callback) => {
+export default (shouldTrack, callback) => {
     const [err, setErr] = useState(null);
+    const [subscriber, setSubscriber] = useState(null);
     const startWatching = async () => {
         try {
             // Request location permissions
             const { status } = await Location.requestForegroundPermissionsAsync();
-            await Location.watchPositionAsync({
+            const sub = await Location.watchPositionAsync({
                 timeInterval: 1000,
                 accuracy: Location.Accuracy.BestForNavigation,
                 distanceInterval: 1,
             }, callback
             );
+            setSubscriber(sub);
             if (status !== 'granted') {
                 throw new Error('Location permission not granted');
             }
@@ -22,7 +24,13 @@ export default (callback) => {
         }
     };
     useEffect(() => {
-        startWatching();
-    }, []);
+        if (shouldTrack) {
+            startWatching();
+        }
+        else {
+            subscriber.remove();
+            setSubscriber(null);
+        }
+    }, [shouldTrack]);
     return [err];
 }
