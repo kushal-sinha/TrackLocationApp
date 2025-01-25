@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useRef } from "react";
 import { ActivityIndicator, StyleSheet } from "react-native";
-import MapView, { Circle } from 'react-native-maps';
+import MapView, { Circle, Polyline } from 'react-native-maps';
 import { Context as LocationContext } from "../context/LocationContext";
 
 const Map = () => {
-    const { state: { currentLocation } } = useContext(LocationContext);
+    const { state: { currentLocation, locations } } = useContext(LocationContext);
     const mapRef = useRef(null);
 
     useEffect(() => {
@@ -48,13 +48,14 @@ const Map = () => {
                 strokeColor="rgba(158,158,255,1.0)"
                 fillColor="rgba(158,158,255,0.3)"
             />
+            <Polyline coordinates={locations.map(loc => loc.coords)} />
         </MapView>
-    );
+    ); R
 };
 
 const styles = StyleSheet.create({
     map: {
-        height: 300,
+        height: 200,
     },
 });
 
