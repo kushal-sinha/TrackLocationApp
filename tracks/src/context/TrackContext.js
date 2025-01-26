@@ -1,30 +1,25 @@
-import createDataContext from "./createDataContext";
-import trackerApi from "../api/tracker";
+import createDataContext from './createDataContext';
+import trackerApi from '../api/tracker';
 
 const trackReducer = (state, action) => {
     switch (action.type) {
-        case "add_track":
-            return { ...state, tracks: [...state.tracks, action.payload] };
+        case 'fetch_tracks':
+            return action.payload;
         default:
             return state;
     }
 };
 
-const fetchTracks = dispatch => () => {
-    // Fetch logic here if needed
+const fetchTracks = dispatch => async () => {
+    const response = await trackerApi.get('/tracks');
+    dispatch({ type: 'fetch_tracks', payload: response.data });
 };
-
 const createTrack = dispatch => async (name, locations) => {
-    try {
-        await trackerApi.post('/tracks', { name, locations });
-    } catch (err) {
-        console.error("Error creating track:", err.message);
-    }
+    await trackerApi.post('/tracks', { name, locations });
 };
-
 
 export const { Provider, Context } = createDataContext(
     trackReducer,
     { fetchTracks, createTrack },
-    { tracks: [] }
+    []
 );

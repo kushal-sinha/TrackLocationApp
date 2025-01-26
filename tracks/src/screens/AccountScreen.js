@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, Image } from "react-native";
 import { Button } from "react-native-elements";
 import { Context as AuthContext } from "../context/AuthContext";
 import { SafeAreaView } from "react-navigation";
-
+import { FontAwesome } from 'react-native-vector-icons'
 const AccountScreen = () => {
     const { signout } = useContext(AuthContext);
 
@@ -25,6 +25,11 @@ const AccountScreen = () => {
         </SafeAreaView>
     );
 };
+AccountScreen.navigationOptions = {
+    title: "Account",
+    tabBarIcon: <FontAwesome name="gear" size={20} color="black" />,
+};
+
 
 const styles = StyleSheet.create({
     container: {
