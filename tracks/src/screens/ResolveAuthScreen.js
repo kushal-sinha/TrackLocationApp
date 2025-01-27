@@ -43,7 +43,7 @@ const ResolveAuthScreen = () => {
                     source={require("../../assests/map.jpg")} // Add your logo/image here
                     style={styles.logo}
                 />
-                <Text style={styles.title}>Tracker App</Text>
+                <Text style={styles.title}>TrackMate</Text>
             </Animated.View>
             <Text style={styles.subtitle}>Welcome 😊!!</Text>
         </View>
